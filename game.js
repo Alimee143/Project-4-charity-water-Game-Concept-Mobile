@@ -375,6 +375,31 @@ canvas.addEventListener('mousemove', (e) => {
   drop.x = mouseX;
 });
 
+// Touch controls for bucket movement
+canvas.addEventListener('touchmove', function(e) {
+    e.preventDefault();
+    const touch = e.touches[0];
+    const rect = canvas.getBoundingClientRect();
+    // Map touch x to canvas x
+    const x = touch.clientX - rect.left;
+    bucket.x = x - bucket.width / 2;
+}, { passive: false });
+
+// Fullscreen toggle for mobile
+function goFullscreen() {
+    const elem = document.documentElement;
+    if (elem.requestFullscreen) {
+        elem.requestFullscreen();
+    } else if (elem.webkitRequestFullscreen) { // Safari
+        elem.webkitRequestFullscreen();
+    } else if (elem.msRequestFullscreen) { // IE11
+        elem.msRequestFullscreen();
+    }
+}
+
+// Example: attach to a button
+document.getElementById('fullscreen-btn').addEventListener('click', goFullscreen);
+
 function drawLives() {
   const heartSize = 24;
   const padding = 10;
