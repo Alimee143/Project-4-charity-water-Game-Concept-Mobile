@@ -469,6 +469,17 @@ window.addEventListener('DOMContentLoaded', () => {
   drawCharityWaterBrand();
 });
 
-// Also call drawCharityWaterBrand() at the start of your gameLoop as you already do
+// Responsive canvas sizing
+function resizeCanvas() {
+  // Fill the viewport (minus any margins/padding)
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  // Optionally redraw the brand or reset game visuals
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  drawCharityWaterBrand();
+}
+window.addEventListener('resize', resizeCanvas);
+window.addEventListener('orientationchange', resizeCanvas);
 
-// Optionally, if you want it to update on window resize or other events, you can call it again as needed.
+// Call once on load
+resizeCanvas();
